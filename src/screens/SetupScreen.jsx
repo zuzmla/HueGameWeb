@@ -90,7 +90,6 @@ function NativeColorPicker({ value, onChange }) {
     onChange(hsvToHex(newH, newS, newV));
   }
 
-  const hueColor = hsvToHex(h, 1, 1);
 
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -108,13 +107,13 @@ function NativeColorPicker({ value, onChange }) {
         <input
           type="range" min={0} max={100} value={Math.round(s * 100)}
           onChange={e => update(h, e.target.value / 100, v)}
-          style={{ ...sliderStyle, accentColor: hueColor }}
+          style={{ ...sliderStyle, accentColor: COLORS.hunter }}
         />
         <label style={styles.sliderLabel}>Jasność: {Math.round(v * 100)}%</label>
         <input
           type="range" min={0} max={100} value={Math.round(v * 100)}
           onChange={e => update(h, s, e.target.value / 100)}
-          style={{ ...sliderStyle, accentColor: hueColor }}
+          style={{ ...sliderStyle, accentColor: COLORS.hunter }}
         />
         <label style={styles.sliderLabel}>Odcień: {Math.round(h)}°</label>
         <input
@@ -122,7 +121,7 @@ function NativeColorPicker({ value, onChange }) {
           onChange={e => update(Number(e.target.value), s, v)}
           style={{
             ...sliderStyle,
-            accentColor: hueColor,
+            accentColor: COLORS.hunter,
             background: 'linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)',
           }}
         />
@@ -170,10 +169,10 @@ function hsvToHex(h, s, v) {
 
 export default function SetupScreen({ onStart }) {
   const [gridSize, setGridSize]     = useState(6);
-  const [topLeft, setTopLeft]       = useState('#CBD9FF');
+  const [topLeft, setTopLeft]       = useState('#EEF3FF');
   const [topRight, setTopRight]     = useState('#3F6048');
   const [bottomLeft, setBottomLeft] = useState('#3F6048');
-  const [bottomRight, setBottomRight] = useState('#CBD9FF');
+  const [bottomRight, setBottomRight] = useState('#EEF3FF');
 
   const cols = gridSize;
   const rows = Math.round(gridSize * 1.4);
@@ -191,7 +190,28 @@ export default function SetupScreen({ onStart }) {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Hue Game</h1>
+      <h1 style={styles.title}>Zuzia's 'I Love Hue'</h1>
+    {/* Podgląd narożników */}
+        <div style={{
+        width: '55vw',
+        maxWidth: 300,
+        aspectRatio: '1 / 0.72',
+        borderRadius: 12,
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: 0,
+        }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 4, backgroundColor: isValidHex(topLeft)  ? topLeft  : '#ccc' }} />
+            <div style={{ width: 36, height: 36, borderRadius: 4, backgroundColor: isValidHex(topRight) ? topRight : '#ccc' }} />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 4, backgroundColor: isValidHex(bottomLeft)  ? bottomLeft  : '#ccc' }} />
+            <div style={{ width: 36, height: 36, borderRadius: 4, backgroundColor: isValidHex(bottomRight) ? bottomRight : '#ccc' }} />
+        </div>
+        </div>
 
       {/* Kolory narożników */}
       <div style={styles.section}>
