@@ -1,0 +1,18 @@
+{
+  "name": "Zuzia's Hue Game",
+  "short_name": "Hue Game",
+  "description": "'I Love Hue' by Zuzia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#CBD9FF",
+  "theme_color": "#CBD9FF",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
