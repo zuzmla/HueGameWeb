@@ -49,6 +49,7 @@ function ColorPicker({ label, value, onChange }) {
           autoComplete="off"
           style={{
             ...styles.hexInput,
+            fontSize: '16px',
             borderColor: !valid && input.length > 1 ? COLORS.error : 'rgba(63,96,72,0.2)',
           }}
         />
@@ -171,8 +172,8 @@ export default function SetupScreen({ onStart }) {
   const [gridSize, setGridSize]     = useState(6);
   const [topLeft, setTopLeft]       = useState('#EEF3FF');
   const [topRight, setTopRight]     = useState('#3F6048');
-  const [bottomLeft, setBottomLeft] = useState('#3F6048');
-  const [bottomRight, setBottomRight] = useState('#EEF3FF');
+  const [bottomLeft, setBottomLeft] = useState('#959bcf');
+  const [bottomRight, setBottomRight] = useState('#f5ce85');
 
   const cols = gridSize;
   const rows = Math.round(gridSize * 1.4);

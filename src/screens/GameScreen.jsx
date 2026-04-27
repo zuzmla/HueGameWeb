@@ -30,6 +30,7 @@ export default function GameScreen({ config, onNewGame }) {
 
   const [tiles, setTiles]       = useState(initialTiles);
   const [selected, setSelected] = useState(null);
+  const [showGrid, setShowGrid] = useState(false);
 
   const isSolvedNow = tiles.length > 0 && isSolved(tiles, cols);
 
@@ -78,6 +79,10 @@ export default function GameScreen({ config, onNewGame }) {
     clearGameState();
     onNewGame();
   }
+// this is what toggles if the "completed" modal is visible or not
+  function handleViewGrid(){
+    setShowGrid(!showGrid)
+  }
 
   return (
     <div style={{
@@ -109,12 +114,14 @@ export default function GameScreen({ config, onNewGame }) {
       </div>
 
       {/* Przycisk nowej gry */}
-      <button onClick={handleNewGame} style={btnStyle}>
-        Nowa gra
-      </button>
+      {!isSolvedNow && (
+        <button onClick={handleNewGame} style={btnStyle}>
+          Nowa gra
+        </button>
+      )}
 
       {/* Modal wygranej */}
-      {isSolvedNow && (
+      {isSolvedNow && !showGrid && (
         <div style={overlayStyle}>
           <div style={modalStyle}>
             <p style={{ fontSize: 28, fontWeight: 700, color: COLORS.hunter, margin: 0 }}>
@@ -126,6 +133,14 @@ export default function GameScreen({ config, onNewGame }) {
           </div>
         </div>
       )}
+      {isSolvedNow && (
+        <div style={{position: 'fixed', bottom: '10%'}}>
+          <button onClick={handleViewGrid} style={btnStyle}>
+            Show grid
+          </button>
+        </div>
+      )}
+
     </div>
   );
 }
@@ -146,6 +161,14 @@ const overlayStyle = {
   position: 'fixed',
   inset: 0,
   backgroundColor: 'rgba(0,0,0,0.4)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const alwaysOnTop = {
+  position: 'fixed',
+  inset: 0,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
